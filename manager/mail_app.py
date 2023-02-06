@@ -20,12 +20,15 @@ def send_mail(contacts):
 
     msg["Subject"] = contacts["subject"]
     try:
-        with SMTP_SSL("smtp.gmail.com", 465) as smtp:
+        with SMTP_SSL(config["EMAIL_SERVER"], config["PORT"]) as smtp:
             for contact in contacts:
                 # to get html temp and format it with user details
-                with open(get_html_temp(contacts["template_id"]), 'r+') as level_1:
-                    string_html_temp = level_1.read().format(**contact)
-                msg.add_alternative(string_html_temp, subtype="html")
+                result = get_html_temp(contacts["template_id"])
+                # with open(get_html_temp(contacts["template_id"]), 'r+') as level_1:
+                #     string_html_temp = level_1.read().format(**contact)
+                result = result["content"]
+
+                msg.add_alternative(result.format(**contact), subtype="html")
                 smtp.login(config["EMAIL_SENDER"], config["PASSWORD"])
                 smtp.send_message(msg, to_addrs=contact["email"])
                 logger.info(InfoMessage.EMAIL_SENT)
@@ -39,14 +42,13 @@ def send_mail(contacts):
 
 
 def get_html_temp(template_id):
-    request_json = req.create_json_from_args(template_id=template_id)
+    # request_json = req.create_json_from_args(template_id=template_id)
     try:
-        result = req.send_post_request(base_url=config["MAIL_BASE_URL"],
-                                       end_point=config["MAIL_POST_URL"],
-                                       port=config["MAIL_PORT"],
-                                       body=request_json,
-                                       timeout=config["MAIL_TIMEOUT"],
-                                       error_log_dict={"message": ErrorMessage.BAD_REQUEST})
+        result = req.send_get_request(base_url=config["MAIL_BASE_URL"],
+                                      end_point=config["MAIL_POST_URL"]+template_id,
+                                      port=config["MAIL_PORT"],
+                                      timeout=config["MAIL_TIMEOUT"],
+                                      error_log_dict={"message": ErrorMessage.BAD_REQUEST})
     except Exception as error:
         logger.error(ErrorMessage.HTML_DB)
         logger.error(error)

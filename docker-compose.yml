@@ -3,7 +3,15 @@ services:
   mail:
     image: mail
     ports:
-      - 5001:5001
+      - "5001:5001"
+
+  mail_template:
+    image: mail_template
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "5002:5002"
+
   
   zookeeper:
     image: wurstmeister/zookeeper

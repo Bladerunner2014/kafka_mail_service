@@ -76,8 +76,8 @@ class RequestHandler:
         else:
             return r.text, r.status_code
 
-    def send_get_request(self, base_url: str, port: str, end_point: str, params: dict, timeout: str,
-                         error_log_dict: dict) -> (dict, int):
+    def send_get_request(self, base_url: str, port: str, end_point: str, timeout: str,
+                         error_log_dict: dict, params: dict = None) -> (dict, int):
         """
         post_request send post request .
 
@@ -113,5 +113,3 @@ class RequestHandler:
     @staticmethod
     def create_json_from_args(**kwargs):
         return locals()["kwargs"]
-
-
