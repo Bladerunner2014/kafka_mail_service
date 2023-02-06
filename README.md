@@ -1,6 +1,6 @@
 # hermod
 
-
+send mail service
 
 ## Getting started
 
@@ -15,14 +15,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin http://gitlab.heyvaai.com/hsip/api/hermod.git
+git remote add origin http://localhost/hsip/api/hermod.git
 git branch -M main
 git push -uf origin main
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](http://gitlab.heyvaai.com/hsip/api/hermod/-/settings/integrations)
+- [ ] [Set up project integrations](http://localhost/hsip/api/hermod/-/settings/integrations)
 
 ## Collaborate with your team
 
