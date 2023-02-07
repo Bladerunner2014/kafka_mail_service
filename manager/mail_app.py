@@ -17,7 +17,7 @@ res = ResponseHandler()
 def send_mail(contacts):
     msg = EmailMessage()
     msg["From"] = config["EMAIL_SENDER"]
-
+    msg["Subject"] = contacts["subject"]
     msg["Subject"] = contacts["subject"]
     try:
         with SMTP_SSL(config["EMAIL_SERVER"], config["PORT"]) as smtp:
