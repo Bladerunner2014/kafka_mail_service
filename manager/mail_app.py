@@ -16,14 +16,14 @@ res = ResponseHandler()
 
 def send_mail(contacts):
     msg = EmailMessage()
+    print (msg)
     msg["From"] = config["EMAIL_SENDER"]
-    msg["Subject"] = contacts["subject"]
-    msg["Subject"] = contacts["subject"]
+    msg["Subject"] = "test"
     try:
         with SMTP_SSL(config["EMAIL_SERVER"], config["PORT"]) as smtp:
             for contact in contacts:
                 # to get html temp and format it with user details
-                result = get_html_temp(contacts["template_id"])
+                result = get_html_temp(contacts["template"])
                 # with open(get_html_temp(contacts["template_id"]), 'r+') as level_1:
                 #     string_html_temp = level_1.read().format(**contact)
                 result = result["content"]
@@ -44,10 +44,11 @@ def send_mail(contacts):
 def get_html_temp(template_id):
     try:
         result = req.send_get_request(base_url=config["MAIL_BASE_URL"],
-                                      end_point=config["MAIL_POST_URL"]+template_id,
+                                      end_point=config["MAIL_GET_URL"]+template_id,
                                       port=config["MAIL_PORT"],
                                       timeout=config["MAIL_TIMEOUT"],
                                       error_log_dict={"message": ErrorMessage.BAD_REQUEST})
+        print(result)
     except Exception as error:
         logger.error(ErrorMessage.HTML_DB)
         logger.error(error)

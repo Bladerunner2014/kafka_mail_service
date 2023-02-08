@@ -1,9 +1,9 @@
 import json
-from kafka import KafkaConsumer
+#from kafka import KafkaConsumer
 import logging
 
 from queue_handler import queue_handler
-from manager.mail_app import send_mail
+#from manager.mail_app import send_mail
 from dotenv import dotenv_values
 
 config = dotenv_values(".env")

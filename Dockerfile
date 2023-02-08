@@ -8,6 +8,5 @@ WORKDIR /mail
 COPY ./requirements.txt  requirements.txt
 RUN pip install -r ./requirements.txt
 COPY . . 
-EXPOSE 8000/TCP
-CMD ["python3","queue-kafka/consumer.py"]
+CMD ["python3","consumer.py"]
 
