@@ -42,7 +42,6 @@ def send_mail(contacts):
 
 
 def get_html_temp(template_id):
-    # request_json = req.create_json_from_args(template_id=template_id)
     try:
         result = req.send_get_request(base_url=config["MAIL_BASE_URL"],
                                       end_point=config["MAIL_POST_URL"]+template_id,
